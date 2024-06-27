@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 30px 12px;
+        }
+
+        section select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid blue;
+        }
+        img{
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <select name="cars" id="cars">
+            </select>
+
+            <div id="detailsSection">
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        let selectElement = document.getElementById('cars');
+        
+
+        let carDetails = {
+            audi: {
+                model: "R8",
+                color: "Black",
+                price: 120000,
+                img:'audiR8.jpeg'
+                
+            },
+
+            ford: {
+                model: 'Shelby GT 500',
+                color: "Blue",
+                price: 140000,
+                img:'sbelbyGT500.jpeg'
+            },
+
+            mitsubishi: {
+                model: 'Evo 10',
+                color: "White",
+                price: 70000,
+                img:'evo10.webp'
+            },
+
+            toyota: {
+                model: 'MK 5',
+                color: "Black",
+                price: 70000,
+                img:'mk 5.jpeg'
+            },
+
+        };
+
+
+        // Array of options to add
+        let options = [
+            { value: 'audi', text: 'Audi' },
+            { value: 'ford', text: 'Ford' },
+            { value: 'mitsubishi', text: 'Mitsubishi' },
+            { value: 'toyota', text: 'Toyota' },
+            { value: 'ford', text: 'Ford' }
+        ];
+
+        // Loop through the array and create <option> elements
+        options.forEach(optionData => {
+            let option = document.createElement('option');
+            option.value = optionData.value;
+            option.text = optionData.text;
+            selectElement.appendChild(option);
+        });
+
+
+        let currentSection = null; // Variable to hold the current section
+
+        let detailsSection = document.getElementById('detailsSection');
+
+        // Function to display details
+        function displayDetails(selectedValue) {
+            let selectedDetails = carDetails[selectedValue];
+
+            // Display details in the details section
+            detailsSection.innerHTML = `<h2>${selectedDetails.model}</h2>
+                                 <p>Color: ${selectedDetails.color}</p>
+                                 <p>Price: $${selectedDetails.price}</p>
+                                 <img src="${selectedDetails.img}"">`;
+        }
+
+        // Display details for the first option by default
+        displayDetails(options[0].value);
+
+        // Event listener to display details when an option is selected 
+        selectElement.addEventListener('change', function () {
+            let selectedValue = selectElement.value;
+            displayDetails(selectedValue);
+        });
+    </script>
+</body>
+
+</html>
+ 
